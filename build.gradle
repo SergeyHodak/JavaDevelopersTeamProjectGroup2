@@ -31,10 +31,18 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.24'
 
 	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'org.postgresql:postgresql'
+
 
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
+	compileOnly 'org.projectlombok:lombok'
+
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	implementation 'org.postgresql:postgresql:42.5.0'
+
+//	runtimeOnly 'org.postgresql:postgresql'
+
+	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //	testImplementation 'org.springframework.security:spring-security-test'
 }
