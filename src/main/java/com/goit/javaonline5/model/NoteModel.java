@@ -25,6 +25,6 @@ public class NoteModel {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "access_type")
+    @Column(name = "status")
     private AccessType accessType;
 }

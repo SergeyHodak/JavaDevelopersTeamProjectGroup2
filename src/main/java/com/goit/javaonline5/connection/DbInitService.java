@@ -1,4 +1,4 @@
-package goit.connection;
+package com.goit.javaonline5.connection;
 
 import lombok.SneakyThrows;
 import org.flywaydb.core.Flyway;
