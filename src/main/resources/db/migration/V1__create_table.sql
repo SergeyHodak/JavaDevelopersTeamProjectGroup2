@@ -1,11 +1,14 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE IF NOT EXISTS users (
-                        id varchar(255) NOT NULL,
+                        id uuid DEFAULT uuid_generate_v4(),
                         email varchar(255) DEFAULT NULL,
                         first_name varchar(255) DEFAULT NULL,
                         last_name varchar(255) DEFAULT NULL,
                         password varchar(255) DEFAULT NULL,
                         PRIMARY KEY (id)
 );
+
 CREATE TYPE access_type AS ENUM('private', 'public');
 
 CREATE TABLE IF NOT EXISTS note (
