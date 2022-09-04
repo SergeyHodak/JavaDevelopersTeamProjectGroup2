@@ -1,6 +1,5 @@
-package com.goit.javaonline5.model;
+package com.goit.javaonline5.note.model;
 
-import com.goit.javaonline5.enums.AccessType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,9 +21,13 @@ public class NoteModel {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "content")
+    @Column(name = "contents")
     private String content;
 
-    @Column(name = "access_type")
-    private AccessType accessType;
+    @Column(name = "contents_short")
+    private String contentsShort;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private AccessType accessTypeStatus;
 }
