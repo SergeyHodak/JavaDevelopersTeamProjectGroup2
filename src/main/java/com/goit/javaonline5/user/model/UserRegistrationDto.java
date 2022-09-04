@@ -1,4 +1,4 @@
-package com.goit.javaonline5.authorization;
+package com.goit.javaonline5.user.model;
 
 public class UserRegistrationDto {
 	private String firstName;

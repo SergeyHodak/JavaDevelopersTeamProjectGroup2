@@ -21,13 +21,10 @@ public class NoteModel {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "contents")
+    @Column(name = "content")
     private String content;
 
-    @Column(name = "contents_short")
-    private String contentsShort;
-
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private AccessType accessTypeStatus;
+    @Column(name = "access_type")
+    private AccessType accessType;
 }

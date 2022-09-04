@@ -1,4 +1,4 @@
-package com.goit.javaonline5.authorization;
+package com.goit.javaonline5.user.model;
 
 
 import lombok.Getter;
@@ -10,7 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Table;

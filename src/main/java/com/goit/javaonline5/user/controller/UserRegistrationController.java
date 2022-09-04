@@ -1,5 +1,7 @@
-package com.goit.javaonline5.authorization;
+package com.goit.javaonline5.user.controller;
 
+import com.goit.javaonline5.user.model.UserRegistrationDto;
+import com.goit.javaonline5.user.service.abstraction.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/register")
 public class UserRegistrationController {
 
-	private UserService userService;
+	private final UserService userService;
 
 	public UserRegistrationController(UserService userService) {
 		super();
@@ -24,7 +26,7 @@ public class UserRegistrationController {
 	
 	@GetMapping
 	public String showRegistrationForm() {
-		return "register";
+		return "user/registration";
 	}
 	
 	@PostMapping

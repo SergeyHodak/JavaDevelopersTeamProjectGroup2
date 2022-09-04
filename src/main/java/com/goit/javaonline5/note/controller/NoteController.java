@@ -14,7 +14,7 @@ public class NoteController {
 
     private final NoteDaoService noteDaoService;
 
-    @GetMapping("")
+    @GetMapping()
     public String allNotesPage(Model model) {
         model.addAttribute("allNotes", noteDaoService.findAll());
 
