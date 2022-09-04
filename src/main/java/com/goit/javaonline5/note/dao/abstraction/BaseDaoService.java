@@ -1,4 +1,4 @@
-package com.goit.javaonline5.dao.abstraction;
+package com.goit.javaonline5.note.dao.abstraction;
 
 import java.util.List;
 

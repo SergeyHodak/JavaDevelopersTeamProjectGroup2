@@ -1,7 +1,7 @@
-package com.goit.javaonline5.controller;
+package com.goit.javaonline5.note.controller;
 
-import com.goit.javaonline5.dao.abstraction.NoteDaoService;
-import com.goit.javaonline5.model.NoteModel;
+import com.goit.javaonline5.note.dao.abstraction.NoteDaoService;
+import com.goit.javaonline5.note.model.NoteModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ public class NoteController {
 
     private final NoteDaoService noteDaoService;
 
-    @GetMapping("")
+    @GetMapping()
     public String allNotesPage(Model model) {
         model.addAttribute("allNotes", noteDaoService.findAll());
 

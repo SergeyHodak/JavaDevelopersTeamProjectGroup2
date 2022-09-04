@@ -1,4 +1,4 @@
-package com.goit.javaonline5.enums;
+package com.goit.javaonline5.note.enums;
 
 import lombok.AllArgsConstructor;
 

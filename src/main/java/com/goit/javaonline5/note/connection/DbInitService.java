@@ -1,4 +1,4 @@
-package com.goit.javaonline5.connection;
+package com.goit.javaonline5.note.connection;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +14,7 @@ public class DbInitService {
     private DbInitService() {
         throw new IllegalStateException("Utility class");
     }
+
     @SneakyThrows
     public static void initDb() {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
