@@ -1,7 +1,7 @@
-package com.goit.javaonline5.note.controller;
+package com.goit.javaonline5.controller;
 
-import com.goit.javaonline5.note.dao.abstraction.NoteDaoService;
-import com.goit.javaonline5.note.model.NoteModel;
+import com.goit.javaonline5.dao.abstraction.NoteDaoService;
+import com.goit.javaonline5.model.NoteModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
