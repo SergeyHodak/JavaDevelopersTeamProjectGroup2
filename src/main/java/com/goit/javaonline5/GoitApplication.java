@@ -1,6 +1,6 @@
 package com.goit.javaonline5;
 
-import com.goit.javaonline5.note.connection.DbInitService;
+import com.goit.javaonline5.connection.DbInitService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,5 +1,9 @@
-package com.goit.javaonline5.authorization;
+package com.goit.javaonline5.user.service;
 
+import com.goit.javaonline5.user.repository.UserRepository;
+import com.goit.javaonline5.user.model.UserModel;
+import com.goit.javaonline5.user.model.UserRegistrationDto;
+import com.goit.javaonline5.user.service.abstraction.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

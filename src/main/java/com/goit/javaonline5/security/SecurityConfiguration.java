@@ -1,6 +1,7 @@
-package com.goit.javaonline5.authorization;
+package com.goit.javaonline5.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.goit.javaonline5.user.service.abstraction.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -13,10 +14,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	
 	@Bean
     public BCryptPasswordEncoder passwordEncoder() {
