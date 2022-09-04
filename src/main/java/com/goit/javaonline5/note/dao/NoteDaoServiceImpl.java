@@ -1,8 +1,8 @@
-package com.goit.javaonline5.dao;
+package com.goit.javaonline5.note.dao;
 
-import com.goit.javaonline5.dao.abstraction.NoteDaoService;
-import com.goit.javaonline5.model.NoteModel;
-import com.goit.javaonline5.repository.NoteRepository;
+import com.goit.javaonline5.note.dao.abstraction.NoteDaoService;
+import com.goit.javaonline5.note.repository.NoteRepository;
+import com.goit.javaonline5.note.model.NoteModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

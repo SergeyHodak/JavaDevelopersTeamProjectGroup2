@@ -1,4 +1,4 @@
-package com.goit.javaonline5.model;
+package com.goit.javaonline5.note.model;
 
 import lombok.Getter;
 import lombok.Setter;
