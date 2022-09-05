@@ -1,20 +1,14 @@
 package com.goit.javaonline5.authorization;
 
 
+import com.goit.javaonline5.note.model.NoteModel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -44,6 +38,9 @@ public class UserModel {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<NoteModel> notes;
 
     public UserModel(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
