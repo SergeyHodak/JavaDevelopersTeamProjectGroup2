@@ -3,6 +3,7 @@ package com.goit.javaonline5.authorization;
 
 import com.goit.javaonline5.note.model.NoteModel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
@@ -11,10 +12,12 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
+
 @Entity
 @Getter
 @Setter
 @ToString
+@RequiredArgsConstructor
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class UserModel {
 
@@ -42,15 +45,7 @@ public class UserModel {
     @OneToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<NoteModel> notes;
 
-    public UserModel(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
 
-    public UserModel() {
 
-    }
 }
 

@@ -1,5 +1,6 @@
 package com.goit.javaonline5.note.model;
 
+import com.goit.javaonline5.authorization.UserModel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -30,4 +31,8 @@ public class NoteModel {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private AccessType accessTypeStatus;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private UserModel users;
 }
