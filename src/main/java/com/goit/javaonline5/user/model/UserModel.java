@@ -1,38 +1,25 @@
 package com.goit.javaonline5.user.model;
 
+import com.goit.javaonline5.note.model.NoteModel;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.*;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import java.util.UUID;
-
+@RequiredArgsConstructor
 @Entity
-@Getter
-@Setter
-@ToString
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Data
+@Table(
+        name = "users",
+        uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class UserModel {
-
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "first_name")
-
     private String firstName;
 
     @Column(name = "last_name")
@@ -44,15 +31,10 @@ public class UserModel {
     @Column(name = "password")
     private String password;
 
-    public UserModel(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserModel() {
-
-    }
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_note",
+            joinColumns = @JoinColumn(name = "note_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<NoteModel> notes;
 }
-

@@ -1,18 +1,13 @@
 package com.goit.javaonline5.note.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "note")
-@Getter
-@Setter
-@ToString
+@Data
 public class NoteModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
