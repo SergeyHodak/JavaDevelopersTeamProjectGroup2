@@ -1,15 +1,19 @@
 package com.goit.javaonline5.user.controller;
 
-import com.goit.javaonline5.user.model.UserRegistrationDto;
+import com.goit.javaonline5.user.model.UserModel;
+
 import com.goit.javaonline5.user.service.abstraction.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
-@RequestMapping("/register")
+@RequestMapping("/registration")
 public class UserRegistrationController {
 
 	private final UserService userService;
@@ -18,20 +22,27 @@ public class UserRegistrationController {
 		super();
 		this.userService = userService;
 	}
-	
-	@ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto() {
-        return new UserRegistrationDto();
-    }
-	
+
+	@ModelAttribute("userModel")
+	public UserModel userModel() {
+		return new UserModel();
+	}
+
 	@GetMapping
 	public String showRegistrationForm() {
 		return "user/registration";
 	}
-	
+
 	@PostMapping
-	public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
-		userService.save(registrationDto);
-		return "redirect:/registration?success";
+	public String registerUserAccount(@Valid UserModel userModel, BindingResult bindingResult) throws Exception {
+		System.out.println(userModel.toString());
+		if (bindingResult.hasErrors()) {
+			return "user/registration";
+		} else {
+			userService.save(userModel);
+			return "redirect:/registration?success";
+		}
+
+
 	}
 }
