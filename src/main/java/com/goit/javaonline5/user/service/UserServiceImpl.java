@@ -16,8 +16,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-import static com.goit.javaonline5.user.service.email.EmailFormatCheck.isTheEmailCorrect;
-
 
 @Service
 @RequiredArgsConstructor
@@ -30,17 +28,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserModel userModel) throws Exception {
-
-        UserModel user = new UserModel(userModel.getFirstName(),userModel.getLastName(),
-                userModel.getEmail(),passwordEncoder.encode(userModel.getPassword()));
-
-        if(isTheEmailCorrect(userModel.getEmail())){
-
-        userRepository.save(user);}
-
-        else {
-            throw new Exception("Invalid email format");
+        UserModel user = userRepository.findByEmail(userModel.getEmail());
+        if (user == null) {
+            userRepository.save(userModel);
         }
+
+
+
     }
 
 

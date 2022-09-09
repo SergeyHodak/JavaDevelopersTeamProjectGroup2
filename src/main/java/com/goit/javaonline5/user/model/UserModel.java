@@ -4,11 +4,13 @@ import com.goit.javaonline5.note.model.NoteModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Entity
@@ -19,9 +21,12 @@ import java.util.Set;
         uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class UserModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    protected Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id")
+    protected UUID id;
 
     @Column(name = "first_name")
     protected String firstName;
@@ -44,10 +49,5 @@ public class UserModel {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     protected Set<NoteModel> notes;
 
-    public UserModel(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
+
 }
