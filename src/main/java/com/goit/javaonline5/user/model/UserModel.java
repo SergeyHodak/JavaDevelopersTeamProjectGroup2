@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -27,7 +29,9 @@ public class UserModel {
     @Column(name = "last_name")
     protected String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email",unique=true)
+    @Email(message = "Please enter a valid e-mail address")
+    @NotBlank
     protected String email;
 
     @Column(name = "password")

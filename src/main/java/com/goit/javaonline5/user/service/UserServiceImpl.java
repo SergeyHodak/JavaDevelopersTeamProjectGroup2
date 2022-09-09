@@ -1,7 +1,6 @@
 package com.goit.javaonline5.user.service;
 
 import com.goit.javaonline5.user.model.UserModel;
-import com.goit.javaonline5.user.model.UserRegistrationDto;
 import com.goit.javaonline5.user.repository.UserRepository;
 import com.goit.javaonline5.user.service.abstraction.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,17 +29,17 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public void save(UserRegistrationDto registrationDto) {
+    public void save(UserModel userModel) throws Exception {
 
-        UserModel user = new UserModel(registrationDto.getFirstName(),registrationDto.getLastName(),
-                registrationDto.getEmail(),passwordEncoder.encode(registrationDto.getPassword()));
+        UserModel user = new UserModel(userModel.getFirstName(),userModel.getLastName(),
+                userModel.getEmail(),passwordEncoder.encode(userModel.getPassword()));
 
-        if(isTheEmailCorrect(registrationDto.getEmail())){
+        if(isTheEmailCorrect(userModel.getEmail())){
 
         userRepository.save(user);}
 
         else {
-
+            throw new Exception("Invalid email format");
         }
     }
 
