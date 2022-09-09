@@ -1,10 +1,10 @@
 package com.goit.javaonline5.user.service;
 
-import com.goit.javaonline5.user.repository.UserRepository;
 import com.goit.javaonline5.user.model.UserModel;
-import com.goit.javaonline5.user.model.UserRegistrationDto;
+import com.goit.javaonline5.user.repository.UserRepository;
 import com.goit.javaonline5.user.service.abstraction.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,19 +20,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+
+
+    @Autowired
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public UserModel save(UserRegistrationDto registrationDto) {
-        UserModel user = new UserModel() {{
-            setFirstName(registrationDto.getFirstName());
-            setLastName(registrationDto.getLastName());
-            setEmail(registrationDto.getEmail());
-            setPassword(passwordEncoder.encode(
-                    registrationDto.getPassword()
-            ));
-        }};
-        return userRepository.save(user);
+    public void save(UserModel userModel) throws Exception {
+        UserModel user = userRepository.findByEmail(userModel.getEmail());
+        if (user == null) {
+            userRepository.save(userModel);
+        }
     }
 
     @Override
@@ -42,7 +40,7 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
-				user.getPassword(), emptyAuthorities());
+                user.getPassword(), (emptyAuthorities()));
     }
 
     private Collection<? extends GrantedAuthority> emptyAuthorities() {

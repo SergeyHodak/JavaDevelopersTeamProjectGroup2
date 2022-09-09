@@ -1,19 +1,24 @@
 package com.goit.javaonline5.user.model;
 
 import com.goit.javaonline5.note.model.NoteModel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @Entity
-@Data
-@Table(name = "users")
+@Setter
+@Getter
+@Table(
+        name = "users",
+        uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class UserModel {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -29,10 +34,9 @@ public class UserModel {
     @Column(name = "last_name")
     protected String lastName;
 
-    @Pattern(
-            regexp = "[A-Za-z\\d!#$%&'*+/=?^_`.{|}~-]+@[a-z\\d]+.[a-z\\d]+",
-            message = "Invalid email!")
-    @Column(name = "email")
+    @Column(name = "email",unique=true)
+    @Email(message = "Please enter a valid e-mail address")
+    @NotBlank
     protected String email;
 
     @Column(name = "password")
