@@ -1,5 +1,6 @@
 package com.goit.javaonline5.note.model;
 
+import com.goit.javaonline5.note.enums.AccessType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
