@@ -42,11 +42,10 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
-				user.getPassword(), EmptyAuthorities());
+				user.getPassword(), emptyAuthorities());
     }
 
-    //todo. ЩО ТУТ ТВОРИТЬСЯ?
-    private Collection<? extends GrantedAuthority> EmptyAuthorities() {
+    private Collection<? extends GrantedAuthority> emptyAuthorities() {
         Collection<String> emptyList = Collections.emptyList();
         return emptyList.stream().map(empty -> new SimpleGrantedAuthority(empty.toString())).collect(Collectors.toList());
     }
