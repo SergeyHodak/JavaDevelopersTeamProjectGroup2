@@ -55,7 +55,7 @@
                                         <div th:each="type : ${access_types}">
                                             <input class="form-check-input" th:type="radio"
                                                    name="access_type" th:value="${type}"
-                                                   th:checked="${type.toValue() eq checked}">
+                                                   th:checked="${type.name() eq 'PRIVATE'}">
                                             <label th:for="${type}"
                                                    th:text="${type.toValue()}"></label>
 

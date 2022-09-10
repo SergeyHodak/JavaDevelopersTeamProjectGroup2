@@ -30,7 +30,6 @@ public class NoteController {
     public String newNotePage(Model model) {
         model.addAttribute("note", new NoteModel());
         model.addAttribute("access_types", AccessType.values());
-        model.addAttribute("checked", AccessType.PRIVATE.toValue());
 
         return "note/new";
     }
