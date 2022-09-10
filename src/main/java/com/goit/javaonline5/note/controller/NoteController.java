@@ -46,9 +46,11 @@ public class NoteController {
         return "note/show";
     }
 
-    @GetMapping("/{id}/edit")
-    public String editNotePage(@PathVariable("id") UUID id, Model model) {
-        model.addAttribute("general", noteDaoService.findById(id));
+    @GetMapping("/edit")
+    public String editNotePage(Model model,
+                               @RequestParam("note_id") UUID id
+    ) {
+        model.addAttribute("note", noteDaoService.findById(id));
 
         return "note/edit";
     }
