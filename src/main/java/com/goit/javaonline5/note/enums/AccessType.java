@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum AccessType {
-    PRIVATE("private"),
-    PUBLIC("public");
+    PRIVATE("Private"),
+    PUBLIC("Public");
 
     private final String dbValue;
 

@@ -2,6 +2,7 @@ package com.goit.javaonline5.note.model;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import com.goit.javaonline5.note.enums.AccessType;
 
 import javax.persistence.*;
 import java.util.UUID;

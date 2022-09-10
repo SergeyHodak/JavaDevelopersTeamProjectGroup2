@@ -1,6 +1,5 @@
 package com.goit.javaonline5.user.service.abstraction;
 
-
 import com.goit.javaonline5.user.model.UserModel;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
