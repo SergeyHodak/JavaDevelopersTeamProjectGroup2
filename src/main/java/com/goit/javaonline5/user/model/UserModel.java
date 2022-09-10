@@ -20,6 +20,7 @@ import java.util.UUID;
         name = "users",
         uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class UserModel {
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(

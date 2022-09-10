@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="btn-group-vertical">
-                                        <label>Access type</label>
+                                        <label>Access type:</label>
                                         <div th:each="type : ${access_types}">
                                             <input class="form-check-input" type="radio" th:field="*{accessType}" th:name="${type}"
                                                    th:value="${type}">
