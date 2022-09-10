@@ -19,7 +19,7 @@ public class NoteController {
     public String allNotesPage(Model model) {
         model.addAttribute("allNotes", noteDaoService.findAll());
 
-        return "note/index";
+        return "note/note_list";
     }
 
     @GetMapping("/new")
