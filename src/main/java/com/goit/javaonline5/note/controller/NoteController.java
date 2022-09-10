@@ -59,14 +59,14 @@ public class NoteController {
         return "note/note_share";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/{id}/edit")
     public String editNotePage(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("general", noteDaoService.findById(id));
 
         return "note/edit";
     }
 
-    @PatchMapping("/edit/{id}")
+    @PatchMapping("/{id}/edit")
     public String editNoteRequest(@PathVariable("id") UUID id, @ModelAttribute NoteModel noteModel) {
         noteDaoService.updateById(noteModel, id);
 
