@@ -2,6 +2,7 @@ package com.goit.javaonline5.user.controller;
 
 import com.goit.javaonline5.security.service.RegistrationService;
 import com.goit.javaonline5.user.model.UserRegistrationDto;
+import com.goit.javaonline5.util.UserRegistrationDtoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,8 @@ public class AuthController {
 
     private final RegistrationService registrationService;
 
+    private final UserRegistrationDtoValidator userRegistrationDtoValidator;
+
     @GetMapping("/login")
     public String loginPage() {
         return "user/login";
@@ -32,7 +35,10 @@ public class AuthController {
 
     @PostMapping("/registration")
     public String performRegistration(@ModelAttribute("userModel") @Valid UserRegistrationDto person,
-                                      BindingResult bindingResult) {
+                                      BindingResult bindingResult
+    ) {
+        userRegistrationDtoValidator.validate(person, bindingResult);
+
         if (bindingResult.hasErrors()) return "user/registration";
 
         registrationService.register(person);

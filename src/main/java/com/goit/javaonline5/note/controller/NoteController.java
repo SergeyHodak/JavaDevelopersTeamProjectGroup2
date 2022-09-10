@@ -24,19 +24,23 @@ public class NoteController {
         return "note/note_list";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/create")
     public String newNotePage(Model model) {
         model.addAttribute("note", new NoteModel());
         model.addAttribute("access_types", AccessType.values());
+        model.addAttribute("checked", AccessType.PRIVATE.toValue());
 
         return "note/new";
     }
 
-    @PostMapping("/new")
-    public String addNewNote(@ModelAttribute NoteModel noteModel) {
+    @PostMapping("/create")
+    public String addNewNote(@ModelAttribute NoteModel noteModel,
+                             @RequestParam("access_type") String accessType
+    ) {
+        noteModel.setAccessType(AccessType.valueOf(accessType));
         noteDaoService.save(noteModel);
 
-        return "redirect:/";
+        return "redirect:/note/list";
     }
 
     @GetMapping("/{id}")
