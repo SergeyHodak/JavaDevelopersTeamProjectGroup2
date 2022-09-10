@@ -6,8 +6,10 @@ import com.goit.javaonline5.note.model.NoteModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -34,9 +36,12 @@ public class NoteController {
     }
 
     @PostMapping("/create")
-    public String addNewNote(@ModelAttribute NoteModel noteModel,
+    public String addNewNote(@ModelAttribute("note") @Valid NoteModel noteModel,
+                             final BindingResult bindingResult,
                              @RequestParam("access_type") String accessType
     ) {
+        if (bindingResult.hasErrors()) return "note/new";
+
         noteModel.setAccessType(AccessType.valueOf(accessType));
         noteDaoService.save(noteModel);
 

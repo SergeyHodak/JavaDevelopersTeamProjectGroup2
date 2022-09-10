@@ -25,8 +25,10 @@
 
                                         <div class="form-outline">
                                             <input type="text" id="name" class="form-control form-control-lg"
-                                            th:field="*{name}"/>
+                                            th:field="*{name}" required/>
                                             <label class="form-label" for="name">Name</label>
+                                            <span class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
+                                                  th:errors="*{name}">Name error</span>
                                         </div>
 
                                     </div>
@@ -38,9 +40,12 @@
                                         <div class="form-outline mb-4" style="width: 100%">
                                             <textarea class="form-control" id="noteText" rows="20"
                                                       maxlength="10000"
-                                                      th:field="*{content}">
+                                                      th:field="*{content}" required>
                                             </textarea>
                                             <label class="form-label" for="noteText">Note text</label>
+                                            <span class="alert alert-danger" th:if="${#fields.hasErrors('content')}"
+                                                  th:errors="*{content}">Content error</span>
+
                                         </div>
                                     </div>
                                 </div>
