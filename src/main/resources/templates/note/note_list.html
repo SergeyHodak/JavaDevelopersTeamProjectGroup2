@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec=""
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Мої замітки</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+    <style>
+        .icon-create {
+            background-image: url("/css/note/images/create.png");
+            padding-left: 30px;
+            padding-top: 0px;
+            padding-bottom: 1px;
+            background-repeat: no-repeat;
+        }
+
+        .icon-delete {
+            background-image: url("/css/note/images/delete.png");
+            padding-left: 25px;
+            padding-top: 3px;
+            padding-bottom: 20px;
+            background-repeat: no-repeat;
+        }
+
+        .icon-edit {
+            background-image: url("/css/note/images/edit.png");
+            padding-left: 25px;
+            padding-top: 3px;
+            padding-bottom: 20px;
+            background-repeat: no-repeat;
+        }
+
+        .icon-link {
+            background-image: url("/css/note/images/link.png");
+            padding-left: 25px;
+            padding-top: 3px;
+            padding-bottom: 20px;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div class="container-md">
+    <br>
+    <div class="row">
+        <div class="container">
+            <h1 class="card-title" th:text="'Мої замітки - ' + ${allNotes.size()}">
+            </h1>
+            <a th:href="'/note/create'"><img src="/css/note/images/create.png"></a>
+
+            <table class="table table-striped">
+                <thead>
+                <tr class="table-secondary">
+                    <th>Ім'я</th>
+                    <th>Зміст</th>
+                    <th>Доступ</th>
+                    <th style="width:20%">Дії</th>
+                </tr>
+                </thead>
+                <tbody class="table-light">
+                <tr th:each="note : ${allNotes}">
+                    <td th:text="${note.getName()}"></td>
+                    <td th:text="${note.getContent()}"></td>
+                    <td th:text="${note.getAccessType().toValue()}"></td>
+
+                    <td>
+                        <a th:href="'/note/edit'">
+                            <img src="/css/note/images/edit.png">
+                        </a>
+                        <a th:href="'/note/' + ${note.id}">
+                            <img src="/css/note/images/delete.png">
+                        </a>
+                        <a th:href="'/note/share/' + ${note.id}">
+                            <img src="/css/note/images/link.png">
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
