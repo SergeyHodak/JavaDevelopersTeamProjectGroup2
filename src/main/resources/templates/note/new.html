@@ -11,22 +11,24 @@
 <body>
 
 <div>
-    <section class="vh-100 gradient-custom">
+    <section class="gradient-custom">
         <div class="container py-5 h-100">
             <div class="row justify-content-center align-items-center h-100">
                 <div class="col-12 col-lg-9 col-xl-7">
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5" style="text-align: center">Add new note</h3>
-                            <form th:method="POST" th:action="@{/note/new}" th:object="${note}">
+                            <form th:method="POST" th:action="@{/note/create}" th:object="${note}">
 
                                 <div class="row">
                                     <div class="col-md-6 mb-4" style="width: 100%">
 
                                         <div class="form-outline">
                                             <input type="text" id="name" class="form-control form-control-lg"
-                                            th:field="*{name}"/>
+                                            th:field="*{name}" required/>
                                             <label class="form-label" for="name">Name</label>
+                                            <span class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
+                                                  th:errors="*{name}">Name error</span>
                                         </div>
 
                                     </div>
@@ -36,9 +38,14 @@
                                     <div class="col-md-6 mb-4 d-flex align-items-center" style="width: 100%">
 
                                         <div class="form-outline mb-4" style="width: 100%">
-                                            <textarea class="form-control" id="noteText" rows="4"
-                                                      th:field="*{content}"></textarea>
+                                            <textarea class="form-control" id="noteText" rows="20"
+                                                      maxlength="10000"
+                                                      th:field="*{content}" required>
+                                            </textarea>
                                             <label class="form-label" for="noteText">Note text</label>
+                                            <span class="alert alert-danger" th:if="${#fields.hasErrors('content')}"
+                                                  th:errors="*{content}">Content error</span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -46,8 +53,9 @@
                                 <div class="btn-group-vertical">
                                         <label>Access type:</label>
                                         <div th:each="type : ${access_types}">
-                                            <input class="form-check-input" type="radio" th:field="*{accessType}" th:name="${type}"
-                                                   th:value="${type}">
+                                            <input class="form-check-input" th:type="radio"
+                                                   name="access_type" th:value="${type}"
+                                                   th:checked="${type.name() eq 'PRIVATE'}">
                                             <label th:for="${type}"
                                                    th:text="${type.toValue()}"></label>
 
