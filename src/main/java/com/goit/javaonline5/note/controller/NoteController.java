@@ -10,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -26,11 +28,14 @@ public class NoteController {
         return "note/note_list";
     }
 
-    @GetMapping("/create")
-    public String newNotePage(Model model) {
-        model.addAttribute("note", new NoteModel());
-        model.addAttribute("access_types", AccessType.values());
+    @ModelAttribute("access_types")
+    public List<AccessType> getCountries() {
+        return new ArrayList<>(AccessType.getAllValues());
+    }
 
+    @GetMapping("/create")
+    public String newNotePage(@ModelAttribute("note") NoteModel noteModel,
+                              @ModelAttribute("access_types") List<AccessType> accessTypes) {
         return "note/new";
     }
 
