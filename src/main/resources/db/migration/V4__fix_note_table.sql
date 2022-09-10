@@ -1,0 +1,5 @@
+ALTER TABLE note ALTER COLUMN access_type TYPE VARCHAR(20);
+
+DROP TYPE IF EXISTS access_type;
+
+ALTER TABLE users ADD CONSTRAINT uniqueEmail UNIQUE (email);
