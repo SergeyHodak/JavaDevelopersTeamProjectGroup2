@@ -1,6 +1,7 @@
 package com.goit.javaonline5.note.controller;
 
 import com.goit.javaonline5.note.dao.abstraction.NoteDaoService;
+import com.goit.javaonline5.note.enums.AccessType;
 import com.goit.javaonline5.note.model.NoteModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,13 @@ public class NoteController {
     public String allNotesPage(Model model) {
         model.addAttribute("allNotes", noteDaoService.findAll());
 
-        return "note/index";
+        return "note/note_list";
     }
 
     @GetMapping("/new")
     public String newNotePage(Model model) {
         model.addAttribute("note", new NoteModel());
+        model.addAttribute("access_types", AccessType.values());
 
         return "note/new";
     }
