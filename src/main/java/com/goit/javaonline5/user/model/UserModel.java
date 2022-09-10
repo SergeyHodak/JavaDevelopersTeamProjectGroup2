@@ -1,58 +1,51 @@
 package com.goit.javaonline5.user.model;
 
-
+import com.goit.javaonline5.note.model.NoteModel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import java.util.Set;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @Entity
-@Getter
 @Setter
-@ToString
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Getter
+@Table(
+        name = "users",
+        uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class UserModel {
-
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id")
-    private UUID id;
+    protected UUID id;
 
     @Column(name = "first_name")
-
-    private String firstName;
+    protected String firstName;
 
     @Column(name = "last_name")
-    private String lastName;
+    protected String lastName;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "email",unique=true)
+    @Email(message = "Please enter a valid e-mail address")
+    @NotBlank
+    protected String email;
 
     @Column(name = "password")
-    private String password;
+    protected String password;
 
-    public UserModel(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserModel() {
-
-    }
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_note",
+            joinColumns = @JoinColumn(name = "note_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    protected Set<NoteModel> notes;
 }
-

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -30,19 +31,19 @@ public class NoteDaoServiceImpl implements NoteDaoService {
     }
 
     @Override
-    public NoteModel findById(final Long id) {
+    public NoteModel findById(final UUID id) {
         return noteRepository.findById(id).orElse(new NoteModel());
     }
 
     @Override
-    public NoteModel updateById(final NoteModel entity, final Long id) {
+    public NoteModel updateById(final NoteModel entity, final UUID id) {
         entity.setId(id);
 
         return noteRepository.save(entity);
     }
 
     @Override
-    public void delete(final Long id) {
+    public void delete(final UUID id) {
         noteRepository.deleteById(id);
     }
 }

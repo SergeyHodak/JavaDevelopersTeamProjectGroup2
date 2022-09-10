@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/note")
@@ -38,28 +40,28 @@ public class NoteController {
     }
 
     @GetMapping("/{id}")
-    public String certainNoteIdPage(@PathVariable("id") Long id, Model model) {
+    public String certainNoteIdPage(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("general", noteDaoService.findById(id));
 
         return "note/show";
     }
 
     @GetMapping("/{id}/edit")
-    public String editNotePage(@PathVariable("id") long id, Model model) {
+    public String editNotePage(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("general", noteDaoService.findById(id));
 
         return "note/edit";
     }
 
     @PatchMapping("/{id}/edit")
-    public String editNoteRequest(@PathVariable("id") long id, @ModelAttribute NoteModel noteModel) {
+    public String editNoteRequest(@PathVariable("id") UUID id, @ModelAttribute NoteModel noteModel) {
         noteDaoService.updateById(noteModel, id);
 
         return "redirect:/";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteNote(@PathVariable long id) {
+    public String deleteNote(@PathVariable UUID id) {
         noteDaoService.delete(id);
 
         return "redirect:/";
