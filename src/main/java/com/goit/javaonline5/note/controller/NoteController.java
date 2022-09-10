@@ -52,11 +52,11 @@ public class NoteController {
         return "redirect:/note/list";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/share/{id}")
     public String certainNoteIdPage(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("general", noteDaoService.findById(id));
 
-        return "note/show";
+        return "note/note_share";
     }
 
     @GetMapping("/{id}/edit")
