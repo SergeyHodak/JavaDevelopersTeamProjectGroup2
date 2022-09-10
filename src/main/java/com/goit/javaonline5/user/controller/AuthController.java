@@ -31,6 +31,6 @@ public class AuthController {
     public String performRegistration(@ModelAttribute("userModel") UserRegistrationDto person) {
         registrationService.register(person);
 
-        return "redirect:/user/login";
+        return "redirect:/login";
     }
 }
