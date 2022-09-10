@@ -16,33 +16,33 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
-    private final UserService userService;
+	private final UserService userService;
 
-    public UserRegistrationController(UserService userService) {
-        super();
-        this.userService = userService;
-    }
+	public UserRegistrationController(UserService userService) {
+		super();
+		this.userService = userService;
+	}
 
-    @ModelAttribute("userModel")
-    public UserModel userModel() {
-        return new UserModel();
-    }
+	@ModelAttribute("userModel")
+	public UserModel userModel() {
+		return new UserModel();
+	}
 
-    @GetMapping
-    public String showRegistrationForm() {
-        return "user/registration";
-    }
+	@GetMapping
+	public String showRegistrationForm() {
+		return "user/registration";
+	}
 
-    @PostMapping
-    public String registerUserAccount(@Valid UserModel userModel, BindingResult bindingResult) throws Exception {
-        System.out.println(userModel.toString());
-        if (bindingResult.hasErrors()) {
-            return "user/registration";
-        } else {
-            userService.save(userModel);
-            return "redirect:/registration?success";
-        }
+	@PostMapping
+	public String registerUserAccount(@Valid UserModel userModel, BindingResult bindingResult) throws Exception {
+		System.out.println(userModel.toString());
+		if (bindingResult.hasErrors()) {
+			return "user/registration";
+		} else {
+			userService.save(userModel);
+			return "redirect:/registration?success";
+		}
 
 
-    }
+	}
 }

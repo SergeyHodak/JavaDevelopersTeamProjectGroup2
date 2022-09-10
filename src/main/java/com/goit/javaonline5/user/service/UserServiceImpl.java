@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -32,12 +31,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             userRepository.save(userModel);
         }
-
-
-
     }
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -46,10 +40,9 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
-				user.getPassword(), (emptyAuthorities()));
+                user.getPassword(), (emptyAuthorities()));
     }
 
-    //todo. ЩО ТУТ ТВОРИТЬСЯ?
     private Collection<? extends GrantedAuthority> emptyAuthorities() {
         Collection<String> emptyList = Collections.emptyList();
         return emptyList.stream().map(empty -> new SimpleGrantedAuthority(empty.toString())).collect(Collectors.toList());

@@ -48,6 +48,4 @@ public class UserModel {
             joinColumns = @JoinColumn(name = "note_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     protected Set<NoteModel> notes;
-
-
 }
