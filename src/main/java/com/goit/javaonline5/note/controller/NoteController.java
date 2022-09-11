@@ -3,6 +3,7 @@ package com.goit.javaonline5.note.controller;
 import com.goit.javaonline5.note.dao.abstraction.NoteDaoService;
 import com.goit.javaonline5.note.enums.AccessType;
 import com.goit.javaonline5.note.model.NoteModel;
+import com.goit.javaonline5.user.model.UserModel;
 import com.goit.javaonline5.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -28,7 +29,10 @@ public class NoteController {
 
     @GetMapping("/list")
     public String allNotesPage(Model model, Principal principal) {
-        model.addAttribute("allNotes", userRepository.findByEmail(principal.getName()).getNotes());
+        UserModel byEmail = userRepository.findByEmail(principal.getName());
+        
+        model.addAttribute("allNotes",
+                userRepository.findById(byEmail.getId()).orElse(new UserModel()).getNotes());
 
         return "note/note_list";
     }
@@ -47,10 +51,12 @@ public class NoteController {
     @PostMapping("/create")
     public String addNewNote(@ModelAttribute("note") @Valid NoteModel noteModel,
                              final BindingResult bindingResult,
-                             @RequestParam("access_type") String accessType
+                             @RequestParam("access_type") String accessType,
+                             Principal principal
     ) {
         if (bindingResult.hasErrors()) return "note/new";
 
+        noteModel.setUserId(userRepository.findByEmail(principal.getName()).getId());
         noteModel.setAccessType(AccessType.valueOf(accessType));
         noteDaoService.save(noteModel);
 

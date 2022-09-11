@@ -43,10 +43,7 @@ public class UserModel {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_note",
-            joinColumns = @JoinColumn(name = "note_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @OneToMany(mappedBy = "userModel", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private Set<NoteModel> notes;
 }
