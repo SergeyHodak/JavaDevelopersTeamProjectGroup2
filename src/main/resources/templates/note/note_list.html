@@ -28,10 +28,16 @@
     </style>
 </head>
 <body>
+
 <div class="container-md">
+
     <br>
     <div class="row">
+        <div class="mt-4 pt-2 ">
+            <div class="btn  btn-lg"><a th:href="@{/logout}">Logout</a></div>
+        </div>
         <div class="container">
+
             <h1 class="card-title" th:text="'Мої замітки - ' + ${allNotes.size()}">
             </h1>
             <a th:href="'/note/create'"><img src="/images/create.png"></a>
@@ -70,5 +76,9 @@
     </div>
 
 </div>
+
+
+
+
 </body>
 </html>
