@@ -25,7 +25,7 @@ public class NoteModel {
     private String name;
 
     @Column(name = "content")
-    @Size(min = 5, max = 10000, message = "Імʼя рядка повинно бути між 5 та 10000 символами")
+    @Size(min = 5, max = 10000, message = "Текст замітки повинен бути між 5 та 10000 символами")
     private String content;
 
     @Enumerated(EnumType.STRING)

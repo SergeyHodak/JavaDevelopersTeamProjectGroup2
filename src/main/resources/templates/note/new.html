@@ -40,6 +40,8 @@
                                         <div class="form-outline mb-4" style="width: 100%">
                                             <textarea class="form-control" id="noteText" rows="4"
                                                       th:field="*{content}"></textarea>
+                                            <span class="alert alert-danger" th:if="${#fields.hasErrors('content')}"
+                                                  th:errors="*{content}">Content error</span>
                                             <label class="form-label" for="noteText">Текст нотатки</label>
                                         </div>
                                     </div>
