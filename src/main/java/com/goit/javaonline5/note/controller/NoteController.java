@@ -6,8 +6,12 @@ import com.goit.javaonline5.note.model.NoteModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -24,46 +28,55 @@ public class NoteController {
         return "note/note_list";
     }
 
-    @GetMapping("/create")
-    public String newNotePage(Model model) {
-        model.addAttribute("note", new NoteModel());
-        model.addAttribute("access_types", AccessType.values());
+    @ModelAttribute("access_types")
+    public List<AccessType> getCountries() {
+        return new ArrayList<>(AccessType.getAllValues());
+    }
 
+    @GetMapping("/create")
+    public String newNotePage(@ModelAttribute("note") NoteModel noteModel,
+                              @ModelAttribute("access_types") List<AccessType> accessTypes) {
         return "note/new";
     }
 
-    @PostMapping("/new")
-    public String addNewNote(@ModelAttribute NoteModel noteModel) {
+    @PostMapping("/create")
+    public String addNewNote(@ModelAttribute("note") @Valid NoteModel noteModel,
+                             final BindingResult bindingResult,
+                             @RequestParam("access_type") String accessType
+    ) {
+        if (bindingResult.hasErrors()) return "note/new";
+
+        noteModel.setAccessType(AccessType.valueOf(accessType));
         noteDaoService.save(noteModel);
 
         return "redirect:/note/list";
     }
 
-    @GetMapping("/share/{id}")
+    @GetMapping("/{id}")
     public String certainNoteIdPage(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("general", noteDaoService.findById(id));
 
-        return "note/note_share";
+        return "note/show";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("/{id}/edit")
     public String editNotePage(@PathVariable("id") UUID id, Model model) {
-        model.addAttribute("", noteDaoService.findById(id));
+        model.addAttribute("general", noteDaoService.findById(id));
 
         return "note/edit";
     }
 
-    @PatchMapping("/edit/{id}")
+    @PatchMapping("/{id}/edit")
     public String editNoteRequest(@PathVariable("id") UUID id, @ModelAttribute NoteModel noteModel) {
         noteDaoService.updateById(noteModel, id);
 
-        return "redirect:/note/list";
+        return "redirect:/";
     }
 
     @DeleteMapping("/{id}")
     public String deleteNote(@PathVariable UUID id) {
         noteDaoService.delete(id);
 
-        return "redirect:/note/list";
+        return "redirect:/";
     }
 }
