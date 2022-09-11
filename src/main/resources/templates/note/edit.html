@@ -12,9 +12,6 @@
 
 <div>
 
-
-
-
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
             <div class="row justify-content-center align-items-center h-100">
@@ -22,9 +19,7 @@
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5" style="text-align: center">Add new note</h3>
-                            <form th:method="PATCH" th:action="@{/note/edit}" th:object="${note}">
-                                <input type="hidden" name="note_id" th:value="${note.getId()}">
-
+                            <form th:method="PATCH" th:action="@{/note/edit/{id}(id=${note.getId()})}" th:object="${note}">
                                 <div class="row">
                                     <div class="col-md-6 mb-4" style="width: 100%">
 

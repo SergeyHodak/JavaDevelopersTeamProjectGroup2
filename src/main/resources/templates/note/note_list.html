@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec=""
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="utf-8">
@@ -52,9 +52,8 @@
                     <td th:text="${note.getAccessType().toValue()}"></td>
 
                     <td>
-                        <a th:href="'/note/edit'">
+                        <a th:href="@{/note/edit/{id}(id=${note.getId()})}">
                             <img src="/images/edit.png">
-                            <input type="hidden" name="note_id" th:value="${note.getId()}">
                         </a>
                         <a th:href="'/note/delete/' + ${note.id}">
                             <img src="/images/delete.png">
