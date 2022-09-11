@@ -28,7 +28,6 @@ public class NoteController {
         return "note/note_list";
     }
 
-
         @ModelAttribute("access_types")
     public List<AccessType> getCountries() {
         return new ArrayList<>(AccessType.getAllValues());
