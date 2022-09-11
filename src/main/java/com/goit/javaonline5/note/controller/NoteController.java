@@ -3,13 +3,16 @@ package com.goit.javaonline5.note.controller;
 import com.goit.javaonline5.note.dao.abstraction.NoteDaoService;
 import com.goit.javaonline5.note.enums.AccessType;
 import com.goit.javaonline5.note.model.NoteModel;
+import com.goit.javaonline5.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,15 +24,17 @@ public class NoteController {
 
     private final NoteDaoService noteDaoService;
 
+    private final UserRepository userRepository;
+
     @GetMapping("/list")
-    public String allNotesPage(Model model) {
-        model.addAttribute("allNotes", noteDaoService.findAll());
+    public String allNotesPage(Model model, Principal principal) {
+        model.addAttribute("allNotes", userRepository.findByEmail(principal.getName()).getNotes());
 
         return "note/note_list";
     }
 
     @ModelAttribute("access_types")
-    public List<AccessType> getCountries() {
+    public List<AccessType> getAllAccessTypes() {
         return new ArrayList<>(AccessType.getAllValues());
     }
 
@@ -67,7 +72,7 @@ public class NoteController {
     }
 
     @PatchMapping("/edit/")
-    public String editNoteRequest(@ModelAttribute NoteModel noteModel) {
+    public String editNoteRequest(@ModelAttribute @Valid NoteModel noteModel) {
         noteDaoService.updateById(noteModel, noteModel.getId());
 
         return "redirect:/note/list";
