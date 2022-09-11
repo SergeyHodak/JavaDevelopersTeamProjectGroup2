@@ -48,7 +48,7 @@
                 <tbody class="table-light">
                 <tr th:each="note : ${allNotes}">
                     <td class="bx-content" th:text="${note.getName()}"></td>
-                    <td class="news-content" th:text="${note.getContent()}"></td>
+                    <td><span class="news-content" th:text="${note.getContent()}"></span></td>
                     <td th:text="${note.getAccessType().toValue()}"></td>
 
                     <td>
