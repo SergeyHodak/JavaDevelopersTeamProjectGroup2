@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/auth")
 public class AuthController {
 
     private final RegistrationService registrationService;
@@ -43,6 +43,6 @@ public class AuthController {
 
         registrationService.register(person);
 
-        return "redirect:/user/login";
+        return "redirect:/auth/login";
     }
 }
