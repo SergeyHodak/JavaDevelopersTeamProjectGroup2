@@ -29,10 +29,16 @@
     </style>
 </head>
 <body>
+
 <div class="container-md">
+
     <br>
     <div class="row">
+        <div class="mt-4 pt-2 " align="right">
+            <a th:href="@{/logout}" class="btn btn-sm btn-info">Logout</a>
+        </div>
         <div class="container">
+
             <h1 class="card-title" th:text="'Мої замітки - ' + ${allNotes.size()}">
             </h1>
             <a th:href="'/note/create'"><img src="/images/create.png"></a>
@@ -48,8 +54,8 @@
                 </thead>
                 <tbody class="table-light">
                 <tr th:each="note : ${allNotes}">
-                    <td class="bx-content" th:text="${note.getName()}"></td>
-                    <td><span class="news-content" th:text="${note.getContent()}"></span></td>
+                    <td class="bx-content" th:text="${#strings.abbreviate(note.getName(),25)}"></td>
+                    <td><span class="news-content" th:text="${#strings.abbreviate(note.getContent(),100)}"></span></td>
                     <td th:text="${note.getAccessType().toValue()}"></td>
 
                     <td>
@@ -69,5 +75,9 @@
         </div>
     </div>
 </div>
+
+
+
+
 </body>
 </html>
