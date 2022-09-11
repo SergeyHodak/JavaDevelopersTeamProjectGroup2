@@ -63,10 +63,32 @@ public class NoteController {
     }
 
     @GetMapping("/share/{id}")
-    public String certainNoteIdPage(@PathVariable("id") UUID id, Model model) {
-        model.addAttribute("general", noteDaoService.findById(id));
-
-        return "note/note_share";
+    public String certainNoteIdPage(@PathVariable("id") UUID id, Model model, Principal principal) {
+        NoteModel note = noteDaoService.findById(id);
+        if (note == null) {
+            return "note/note_not_found";
+        }
+        if (note.getAccessType() == AccessType.PRIVATE) {
+            String user = null;
+            if (principal != null) {
+                user = principal.getName();
+            }
+            UUID userId = null;
+            if (user != null) {
+                userId = userRepository.findByEmail(user).getId();
+            }
+            if (userId != null) {
+                if (note.getUserId().equals(userId)) {
+                    model.addAttribute("general", note);
+                    return "note/note_share";
+                }
+            }
+        }
+        if (note.getAccessType() == AccessType.PUBLIC) {
+            model.addAttribute("general", note);
+            return "note/note_share";
+        }
+        return "note/note_not_found";
     }
 
     @GetMapping("/edit/{id}")
