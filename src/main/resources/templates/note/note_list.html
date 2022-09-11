@@ -11,13 +11,14 @@
           crossorigin="anonymous">
     <style>
         .bx-content{
-            overflow: auto;
+            overflow: hidden;
             text-overflow : ellipsis ;
             -webkit-line-clamp : 1 ;
             -webkit-box-orient : vertical ;
         }
         .news-content{
-            overflow: auto;
+            overflow: hidden;
+            width: 100ch;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 1;
@@ -47,7 +48,7 @@
                 <tbody class="table-light">
                 <tr th:each="note : ${allNotes}">
                     <td class="bx-content" th:text="${note.getName()}"></td>
-                    <td class="news-content" th:text="${note.getContent()}"></td>
+                    <td><span class="news-content" th:text="${note.getContent()}"></span></td>
                     <td th:text="${note.getAccessType().toValue()}"></td>
 
                     <td>

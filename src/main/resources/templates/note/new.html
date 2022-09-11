@@ -25,7 +25,7 @@
 
                                         <div class="form-outline">
                                             <input type="text" id="name" class="form-control form-control-lg"
-                                            th:field="*{name}" required/>
+                                                   th:field="*{name}" required/>
                                             <label class="form-label" for="name">Назва</label>
                                             <span class="alert alert-danger" th:if="${#fields.hasErrors('name')}"
                                                   th:errors="*{name}">Name error</span>
@@ -46,15 +46,14 @@
                                 </div>
 
                                 <div class="btn-group-vertical">
-                                        <label>Тип доступу:</label>
-                                        <div th:each="type : ${access_types}">
-                                            <input class="form-check-input" th:type="radio"
-                                                   name="access_type" th:value="${type}"
-                                                   th:checked="${type.name() eq 'PRIVATE'}">
-                                            <label th:for="${type}"
-                                                   th:text="${type.toValue()}"></label>
-
-                                        </div>
+                                    <label>Тип доступу:</label>
+                                    <div th:each="type : ${access_types}">
+                                        <input class="form-check-input" th:type="radio"
+                                               name="access_type" th:value="${type}"
+                                               th:checked="${type.name() eq 'PRIVATE'}">
+                                        <label th:for="${type}"
+                                               th:text="${type.toValue()}"></label>
+                                    </div>
                                 </div>
 
                                 <div class="mt-4 pt-2">

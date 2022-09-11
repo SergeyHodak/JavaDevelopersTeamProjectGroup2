@@ -17,4 +17,3 @@ public interface BaseDaoService<T> {
 
     void delete(UUID id);
 }
-
