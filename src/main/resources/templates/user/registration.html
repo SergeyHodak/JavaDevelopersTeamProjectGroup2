@@ -40,7 +40,7 @@
 
             <h1>Registration</h1>
 
-            <form th:method="POST" th:action="@{/auth/registration}" th:object="${userModel}">
+            <form th:method="POST" th:action="@{/user/registration}" th:object="${userModel}">
                 <div class="form-group">
                     <label class="control-label" for="firstName"> First Name </label>
                     <input id="firstName" class="form-control" th:field="*{firstName}"
@@ -71,7 +71,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Register</button>
                     <br/>
-                    <span>Already registered? <a th:href="@{/auth/login}">Login
+                    <span>Already registered? <a th:href="@{/user/login}">Login
 								here</a></span>
                 </div>
             </form>
