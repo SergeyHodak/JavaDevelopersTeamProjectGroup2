@@ -73,7 +73,7 @@ public class NoteController {
         return "redirect:/note/list";
     }
 
-    @DeleteMapping("/{id}")
+    @RequestMapping("/delete/{id}")
     public String deleteNote(@PathVariable UUID id) {
         noteDaoService.delete(id);
 

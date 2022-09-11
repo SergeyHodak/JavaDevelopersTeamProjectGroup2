@@ -55,7 +55,7 @@
                             <img src="/images/edit.png">
                             <input type="hidden" name="note_id" th:value="${note.getId()}">
                         </a>
-                        <a th:href="'/note/' + ${note.id}">
+                        <a th:href="'/note/delete/' + ${note.id}">
                             <img src="/images/delete.png">
                         </a>
                         <a th:href="'/note/share/' + ${note.id}" >
