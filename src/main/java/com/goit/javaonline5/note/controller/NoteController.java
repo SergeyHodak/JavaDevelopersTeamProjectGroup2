@@ -66,9 +66,9 @@ public class NoteController {
         return "note/edit";
     }
 
-    @PatchMapping("/edit/{id}")
-    public String editNoteRequest(@PathVariable("id") UUID id, @ModelAttribute NoteModel noteModel) {
-        noteDaoService.updateById(noteModel, id);
+    @PatchMapping("/edit/")
+    public String editNoteRequest(@ModelAttribute NoteModel noteModel) {
+        noteDaoService.updateById(noteModel, noteModel.getId());
 
         return "redirect:/note/list";
     }
