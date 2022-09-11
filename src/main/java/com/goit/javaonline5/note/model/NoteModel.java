@@ -1,6 +1,7 @@
 package com.goit.javaonline5.note.model;
 
 import com.goit.javaonline5.note.enums.AccessType;
+import com.goit.javaonline5.user.model.UserModel;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -31,4 +32,11 @@ public class NoteModel {
     @Enumerated(EnumType.STRING)
     @Column(name = "access_type")
     private AccessType accessType;
+
+    @Column(name = "user_id")
+    private UUID userId;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
+    private UserModel userModel;
 }

@@ -10,12 +10,6 @@ CREATE TABLE IF NOT EXISTS note (
     id UUID PRIMARY KEY,
     name VARCHAR(250),
     content VARCHAR(10000),
-    access_type VARCHAR(20)
-);
-
-CREATE TABLE IF NOT EXISTS user_note (
-    user_id UUID NOT NULL,
-    note_id UUID NOT NULL,
-    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY(note_id) REFERENCES note(id) ON DELETE CASCADE
+    access_type VARCHAR(20),
+    user_id UUID REFERENCES users(id)
 );

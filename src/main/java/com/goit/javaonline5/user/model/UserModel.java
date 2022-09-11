@@ -27,26 +27,23 @@ public class UserModel {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id")
-    protected UUID id;
+    private UUID id;
 
     @Column(name = "first_name")
-    protected String firstName;
+    private String firstName;
 
     @Column(name = "last_name")
-    protected String lastName;
+    private String lastName;
 
     @Column(name = "email",unique=true)
     @Email(message = "Please enter a valid e-mail address")
     @NotBlank
-    protected String email;
+    private String email;
 
     @Column(name = "password")
-    protected String password;
+    private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_note",
-            joinColumns = @JoinColumn(name = "note_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    protected Set<NoteModel> notes;
+    @OneToMany(mappedBy = "userModel", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<NoteModel> notes;
 }
