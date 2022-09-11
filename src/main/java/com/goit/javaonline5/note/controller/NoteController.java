@@ -52,14 +52,14 @@ public class NoteController {
         return "redirect:/note/list";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/share/{id}")
     public String certainNoteIdPage(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("general", noteDaoService.findById(id));
 
-        return "note/show";
+        return "note/note_share";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/edit")
     public String editNotePage(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("general", noteDaoService.findById(id));
 
@@ -70,13 +70,13 @@ public class NoteController {
     public String editNoteRequest(@PathVariable("id") UUID id, @ModelAttribute NoteModel noteModel) {
         noteDaoService.updateById(noteModel, id);
 
-        return "redirect:/";
+        return "redirect:/note/list";
     }
 
-    @DeleteMapping("/{id}")
+    @RequestMapping("/delete/{id}")
     public String deleteNote(@PathVariable UUID id) {
         noteDaoService.delete(id);
 
-        return "redirect:/";
+        return "redirect:/note/list";
     }
 }
