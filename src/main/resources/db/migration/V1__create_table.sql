@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY,
     email varchar(255) UNIQUE,
     first_name varchar(255),
@@ -6,7 +6,7 @@ CREATE TABLE users (
     password varchar(255)
 );
 
-CREATE TABLE note (
+CREATE TABLE IF NOT EXISTS note (
     id UUID PRIMARY KEY,
     name VARCHAR(250),
     content VARCHAR(10000),
