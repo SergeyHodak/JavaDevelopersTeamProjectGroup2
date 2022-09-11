@@ -22,11 +22,19 @@
             border: 15px solid orange;
             margin-bottom: 20px;
         }
+        .news-content{
+            width: 700px;
+            overflow: auto;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+        }
 
     </style>
 </head>
 <body>
-<div style="border-radius: 8px;" class="form-center">
+<div  style="border-radius: 8px;" class="form-center news-content">
     <div >
         <h1 th:text="${general.getName()}"></h1>
         <h3 th:text="${general.getContent()}"></h3>
