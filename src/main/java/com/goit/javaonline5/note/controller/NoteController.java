@@ -24,7 +24,7 @@ public class NoteController {
         return "note/note_list";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/create")
     public String newNotePage(Model model) {
         model.addAttribute("note", new NoteModel());
         model.addAttribute("access_types", AccessType.values());
@@ -36,36 +36,34 @@ public class NoteController {
     public String addNewNote(@ModelAttribute NoteModel noteModel) {
         noteDaoService.save(noteModel);
 
-        return "redirect:/";
+        return "redirect:/note/list";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/share/{id}")
     public String certainNoteIdPage(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("general", noteDaoService.findById(id));
 
-        return "note/show";
+        return "note/note_share";
     }
 
     @GetMapping("/edit")
-    public String editNotePage(Model model,
-                               @RequestParam("note_id") UUID id
-    ) {
-        model.addAttribute("note", noteDaoService.findById(id));
+    public String editNotePage(@PathVariable("id") UUID id, Model model) {
+        model.addAttribute("", noteDaoService.findById(id));
 
         return "note/edit";
     }
 
-    @PatchMapping("/{id}/edit")
+    @PatchMapping("/edit/{id}")
     public String editNoteRequest(@PathVariable("id") UUID id, @ModelAttribute NoteModel noteModel) {
         noteDaoService.updateById(noteModel, id);
 
-        return "redirect:/";
+        return "redirect:/note/list";
     }
 
     @DeleteMapping("/{id}")
     public String deleteNote(@PathVariable UUID id) {
         noteDaoService.delete(id);
 
-        return "redirect:/";
+        return "redirect:/note/list";
     }
 }

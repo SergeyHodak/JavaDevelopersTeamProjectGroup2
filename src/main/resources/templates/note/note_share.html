@@ -1,0 +1,37 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Замітка</title>
+    <style>
+
+        .form-center {
+            color: white;
+            background: dimgray;
+            padding: 50px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            border: 15px solid orange;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div style="border-radius: 8px;" class="form-center">
+    <div >
+        <h1 th:text="${general.getName()}"></h1>
+        <h3 th:text="${general.getContent()}"></h3>
+    </div>
+
+</div>
+</body>
+</html>
