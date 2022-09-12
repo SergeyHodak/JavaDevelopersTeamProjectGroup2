@@ -29,7 +29,7 @@ public class NoteController {
     @GetMapping("/list")
     public String allNotesPage(Model model, Principal principal) {
         UserModel byEmail = userRepository.findByEmail(principal.getName());
-        
+
         model.addAttribute("allNotes",
                 userRepository.findById(byEmail.getId()).orElse(new UserModel()).getNotes());
 
@@ -63,30 +63,36 @@ public class NoteController {
     }
 
     @GetMapping("/share/{id}")
-    public String certainNoteIdPage(@PathVariable("id") UUID id, Model model, Principal principal) {
-        NoteModel note = noteDaoService.findById(id);
-        if (note == null) {
+    public String certainNoteIdPage(@PathVariable("id") String stringId, Model model, Principal principal) {
+        UUID id;
+        try {
+            id = UUID.fromString(stringId);
+        } catch (IllegalArgumentException e) {
             return "note/note_not_found";
         }
-        if (note.getAccessType() == AccessType.PRIVATE) {
-            String user = null;
-            if (principal != null) {
-                user = principal.getName();
-            }
-            UUID userId = null;
-            if (user != null) {
-                userId = userRepository.findByEmail(user).getId();
-            }
-            if (userId != null) {
-                if (note.getUserId().equals(userId)) {
-                    model.addAttribute("general", note);
-                    return "note/note_share";
-                }
-            }
+
+        NoteModel note = noteDaoService.findById(id);
+
+        if (note.getId() == null) {
+            return "note/note_not_found";
         }
+
         if (note.getAccessType() == AccessType.PUBLIC) {
             model.addAttribute("general", note);
             return "note/note_share";
+        }
+
+        if (note.getAccessType() == AccessType.PRIVATE) {
+            UUID userId = null;
+            if (principal != null) {
+                userId = userRepository.findByEmail(principal.getName()).getId();
+            }
+            if (note.getUserId().equals(userId)) {
+                model.addAttribute("general", note);
+                return "note/note_share";
+
+            } else return "note/note_is_private";
+
         }
         return "note/note_not_found";
     }
