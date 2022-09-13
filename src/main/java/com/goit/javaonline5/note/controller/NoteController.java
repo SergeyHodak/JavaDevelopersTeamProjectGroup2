@@ -3,6 +3,7 @@ package com.goit.javaonline5.note.controller;
 import com.goit.javaonline5.note.dao.abstraction.NoteDaoService;
 import com.goit.javaonline5.note.enums.AccessType;
 import com.goit.javaonline5.note.model.NoteModel;
+import com.goit.javaonline5.security.service.UserDaoService;
 import com.goit.javaonline5.user.model.UserModel;
 import com.goit.javaonline5.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +25,16 @@ public class NoteController {
 
     private final NoteDaoService noteDaoService;
 
+    private final UserDaoService userDaoService;
+
     private final UserRepository userRepository;
 
     @GetMapping("/list")
     public String allNotesPage(Model model, Principal principal) {
-        UserModel byEmail = userRepository.findByEmail(principal.getName());
+        UserModel byEmail = userDaoService.findByEmail(principal.getName());
 
         model.addAttribute("allNotes",
-                userRepository.findById(byEmail.getId()).orElse(new UserModel()).getNotes());
+                userDaoService.findById(byEmail.getId()).getNotes());
 
         return "note/note_list";
     }
@@ -55,7 +58,7 @@ public class NoteController {
     ) {
         if (bindingResult.hasErrors()) return "note/new";
 
-        noteModel.setUserId(userRepository.findByEmail(principal.getName()).getId());
+        noteModel.setUserId(userDaoService.findByEmail(principal.getName()).getId());
         noteModel.setAccessType(AccessType.valueOf(accessType));
         noteDaoService.save(noteModel);
 
@@ -85,7 +88,7 @@ public class NoteController {
         if (note.getAccessType() == AccessType.PRIVATE) {
             UUID userId = null;
             if (principal != null) {
-                userId = userRepository.findByEmail(principal.getName()).getId();
+                userId = userDaoService.findByEmail(principal.getName()).getId();
             }
             if (note.getUserId().equals(userId)) {
                 model.addAttribute("general", note);
