@@ -3,7 +3,7 @@ package com.goit.javaonline5.note.controller;
 import com.goit.javaonline5.note.dao.abstraction.NoteDaoService;
 import com.goit.javaonline5.note.enums.AccessType;
 import com.goit.javaonline5.note.model.NoteModel;
-import com.goit.javaonline5.security.service.UserDaoService;
+import com.goit.javaonline5.user.dao.abstraction.UserDaoService;
 import com.goit.javaonline5.user.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
