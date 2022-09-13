@@ -1,4 +1,4 @@
-package com.goit.javaonline5.note.controller;
+package com.goit.javaonline5.baseservices.controller;
 
 import com.goit.javaonline5.user.model.UserModel;
 import com.goit.javaonline5.user.repository.UserRepository;

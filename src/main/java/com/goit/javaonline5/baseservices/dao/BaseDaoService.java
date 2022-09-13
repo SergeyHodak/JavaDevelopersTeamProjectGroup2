@@ -1,4 +1,4 @@
-package com.goit.javaonline5.note.dao.abstraction;
+package com.goit.javaonline5.baseservices.dao;
 
 import java.util.List;
 import java.util.UUID;
