@@ -5,7 +5,6 @@ import com.goit.javaonline5.note.enums.AccessType;
 import com.goit.javaonline5.note.model.NoteModel;
 import com.goit.javaonline5.security.service.UserDaoService;
 import com.goit.javaonline5.user.model.UserModel;
-import com.goit.javaonline5.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +25,6 @@ public class NoteController {
     private final NoteDaoService noteDaoService;
 
     private final UserDaoService userDaoService;
-
-    private final UserRepository userRepository;
 
     @GetMapping("/list")
     public String allNotesPage(Model model, Principal principal) {
@@ -109,7 +106,7 @@ public class NoteController {
             return "note/note_not_found";
         }
 
-        if (userRepository.findByEmail(principal.getName()).getId().equals(noteDaoService.findById(id).getUserId())) {
+        if (userDaoService.findByEmail(principal.getName()).getId().equals(noteDaoService.findById(id).getUserId())) {
             model.addAttribute("note", noteDaoService.findById(id));
         } else return "note/not_your_note_page";
 
