@@ -101,8 +101,17 @@ public class NoteController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editNotePage(@PathVariable("id") UUID id, Model model) {
-        model.addAttribute("note", noteDaoService.findById(id));
+    public String editNotePage(@PathVariable("id") String stringId, Model model, Principal principal) {
+        UUID id;
+        try {
+            id = UUID.fromString(stringId);
+        } catch (IllegalArgumentException e) {
+            return "note/note_not_found";
+        }
+
+        if (userRepository.findByEmail(principal.getName()).getId().equals(noteDaoService.findById(id).getUserId())) {
+            model.addAttribute("note", noteDaoService.findById(id));
+        } else return "note/not_your_note_page";
 
         return "note/edit";
     }
